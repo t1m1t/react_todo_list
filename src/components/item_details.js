@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getSingleTodo, deleteToDo, toggleTodo } from '../actions/index';
+import * as actions from '../actions/index';
 
 
 class Details extends Component {
@@ -48,4 +48,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getSingleTodo, deleteToDo, toggleTodo})(Details);
+export default connect(mapStateToProps, actions)(Details);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getTodos } from '../actions/index';
+import { getTodos, deleteToDo } from '../actions/index';
+import Modal from './modal';
 
 
 class List extends Component {
@@ -9,11 +10,25 @@ class List extends Component {
         this.props.getTodos();
     }
 
+    handleDelete(id, title){
+        if(confirm(`Are you sure you want to delete todo item:\n\n${title}`)){
+            this.props.deleteToDo(id).then(() => {
+                this.props.getTodos();
+            })
+        }
+    }
+
     render(){
         const listElements = this.props.list.map((item, index) => {
             return (
-                <li key={index}>
-                    <Link to={`/todo/${item._id}`}>{item.title}</Link>
+                <li key={index} className="list-group-item">
+                    <div className="col-6">
+                        <Link to={`/todo/${item._id}`}>{item.title}</Link>
+                    </div>
+                    <div className="col-4"><span className={item.complete ? 'text-success' : 'text-danger'}>{item.complete ? 'Completed' : 'Incomplete'}</span></div>
+                    <div className="col-2">
+                        <button onClick={() => {this.handleDelete(item._id, item.title)}} className="btn btn-outline-danger">Delete</button>
+                    </div>
                 </li>
             )
         })
@@ -25,6 +40,7 @@ class List extends Component {
             <ul>
                 { listElements }
             </ul>
+            <Modal/>
         </div>
         )
     }
@@ -36,4 +52,4 @@ function mapStateProps(state){
     }
 }
 
-export default connect(mapStateProps, {getTodos: getTodos})(List);
+export default connect(mapStateProps, { getTodos, deleteToDo })(List);
