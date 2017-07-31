@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTodos, deleteToDo } from '../actions/index';
-import Modal from './modal';
+// import Modal from './modal';
 
 
 class List extends Component {
@@ -40,7 +40,7 @@ class List extends Component {
             <ul>
                 { listElements }
             </ul>
-            <Modal/>
+            {/*<Modal/>*/}
         </div>
         )
     }
