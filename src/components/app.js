@@ -52,9 +52,8 @@ class App extends Component {
         return (
             <div className="container">
                 <h1>Todo List</h1>
-                <Add add={(item) => this.addTodo(item)}/>
-                <List delete={(index) => this.deleteTodo(index)}
-                      list={this.state.list}/>
+                <Add add={(item) => this.addTodo(item)}/> 
+                <List list={this.state.list}/>
             </div>
         )
     }
